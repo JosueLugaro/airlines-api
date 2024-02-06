@@ -1,5 +1,5 @@
 #include <httpserver.hpp>
-
+#include <pqxx/pqxx>
 
 using namespace httpserver;
 using namespace std;
@@ -12,6 +12,7 @@ class hello_world_resource : public http_resource {
 };
 
 int main() {
+  pqxx::connection c;
   webserver ws = create_webserver(8000);
 
   hello_world_resource hwr;
