@@ -21,7 +21,7 @@ build/main: $(OBJS)
 	@$(CXX) $^ $(CPPFLAGS) $(CXXFLAGS) -o $@
 
 # Build object files
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp Makefile
 	@echo Compiling $< to object file $@
 	@mkdir -p $(dir $@)
 	@$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
