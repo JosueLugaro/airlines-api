@@ -11,39 +11,27 @@ CXXFLAGS = -std=c++23 -l httpserver -l pqxx -l pq
 BUILD_DIR = build
 SRC_DIR = src
 
-# Object files
+# Source and Object files
 SRCS := $(wildcard $(SRC_DIR)/*/*.cpp)
 OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
-# OBJECTS = main.o hello_world.o
 
-# build_dir/target: src_dir/*/*.cpp src_dir/*/*.hpp
-# compiler -o $@ flags -c $<
-
+# Build executable
 build/main: $(OBJS)
-# $(CXX) $^ $(CPPFLAGS) $(CXXFLAGS) -o $@
-	@echo "build main"
+	@echo Linking object files...
+	@$(CXX) $^ $(CPPFLAGS) $(CXXFLAGS) -o $@
 
-$(BUILD_DIR)/*/%.o: $(SRC_DIR)/*/%.cpp
-#$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
-	@echo $@ "target"
-	@echo $< "prereq"
-
-# build/main.o: $(SRC)/entrypoint/main.cpp
-# 	$(CXX) -o $@ $(CPPFLAGS) $(CXXFLAGS) -c $(SRC)/entrypoint/main.cpp
-
-# build/hello_world.o: $(SRC)/hello_world/hello_world.cpp $(SRC)/hello_world/hello_world.hpp
-# 	$(CXX) -o $@ $(CPPFLAGS) $(CXXFLAGS) -c $(SRC)/hello_world/hello_world.cpp
+# Build object files
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@echo Compiling $< to object file $@
+	@mkdir -p $(dir $@)
+	@$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 .PHONY: run dirs clean blah
 
-blah:
-	echo $(OBJS)
-
 run:
-	build/main
-
-dirs:
-	mkdir build
+	@echo Running executable...
+	@build/main
 
 clean:
-	rm -rf build
+	@echo Cleaning up build directory...
+	@rm -rf build
