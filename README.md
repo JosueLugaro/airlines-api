@@ -1,6 +1,6 @@
 # airlines-api
 
-Welcome to the airlines-api, a REST api built in C++. I started building this to practice C++
+Welcome to the airlines-api, a REST API built in C++. I started building this to practice C++
 and introduce myself to the C++ ecosystem. The airlines-api utilizes [libhttpserver](https://github.com/etr/libhttpserver)
 to handle requests/responses and [libpqxx](https://github.com/jtv/libpqxx) to interface
 with the PostgreSQL database which stores the air travel related data (See the database schema [here](https://github.com/JosueLugaro/airlines-api/wiki/Database-schema)).
