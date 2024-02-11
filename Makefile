@@ -5,7 +5,7 @@ CXX = g++
 CPPFLAGS = -iquote src -MMD -MP
 
 # Compiler flags (-l is a linker flag but I've left it here for ease)
-CXXFLAGS = -std=c++23 -l httpserver -l pqxx -l pq
+CXXFLAGS = -std=c++23 -l httpserver -l pqxx -l pq -Wall -Wextra
 
 # Directories
 BUILD_DIR = build
