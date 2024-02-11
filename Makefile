@@ -2,7 +2,7 @@
 CXX = g++
 
 # preprocesser flags
-CPPFLAGS = -iquote src
+CPPFLAGS = -iquote src -MMD -MP
 
 # Compiler flags (-l is a linker flag but I've left it here for ease)
 CXXFLAGS = -std=c++23 -l httpserver -l pqxx -l pq
@@ -11,11 +11,16 @@ CXXFLAGS = -std=c++23 -l httpserver -l pqxx -l pq
 BUILD_DIR = build
 SRC_DIR = src
 
-# Source and Object files
+# Source, Object, and Dependency files
 SRCS := $(wildcard $(SRC_DIR)/*/*.cpp)
 OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
+DEPENDS := $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.d, $(SRCS))
 
-# Build executable
+# Include dependency files to support
+# header file changes triggering recompilation
+-include $(DEPENDS)
+
+# Link executable from object files
 build/main: $(OBJS)
 	@echo Linking object files...
 	@$(CXX) $^ $(CPPFLAGS) $(CXXFLAGS) -o $@
