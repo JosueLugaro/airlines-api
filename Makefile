@@ -1,7 +1,7 @@
 # Compiler
 CXX = g++
 
-# Preprocesser flags
+# Preprocessor flags
 CPPFLAGS = -iquote src -MMD -MP
 
 # Compiler flags (-l is a linker flag but I've left it here for ease)
