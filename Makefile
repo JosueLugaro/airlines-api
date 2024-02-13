@@ -16,10 +16,6 @@ SRCS := $(wildcard $(SRC_DIR)/*/*.cpp)
 OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
 DEPENDS := $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.d, $(SRCS))
 
-# Include dependency files to support
-# header file changes triggering recompilation
--include $(DEPENDS)
-
 # Link executable from object files
 build/main: $(OBJS)
 	@echo Linking object files...
@@ -30,6 +26,10 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp Makefile
 	@echo Compiling $< to object file $@
 	@mkdir -p $(dir $@)
 	@$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+# Include dependency files to support
+# header file changes triggering recompilation
+-include $(DEPENDS)
 
 .PHONY: run dirs clean blah
 
