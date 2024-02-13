@@ -7,7 +7,7 @@ using namespace httpserver;
 int main() {
   webserver ws = create_webserver(8000);
 
-  hello_world_resource hwr;
+  HelloWorldResource hwr;
 
   ws.register_resource("/hello", &hwr);
   ws.start(true);
