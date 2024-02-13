@@ -6,8 +6,8 @@
 using namespace httpserver;
 using namespace pqxx;
 
-std::shared_ptr<http_response>
-aircrafts::Aircrafts::render_GET(const http_request &) {
+std::shared_ptr<http_response> aircrafts::Aircrafts::render_GET(
+    const http_request &) {
   try {
     char *connection_string = getenv("AIRLINES_CONNECTION");
     connection *c = new connection(connection_string);
