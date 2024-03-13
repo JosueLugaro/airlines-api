@@ -5,7 +5,8 @@
 
 using namespace httpserver;
 
-int main() {
+int main()
+{
   webserver ws = create_webserver(8000);
 
   HelloWorldResource hwr;
