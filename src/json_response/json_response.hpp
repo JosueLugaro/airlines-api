@@ -34,6 +34,13 @@ namespace json
 
     void serialize(const char *key, const std::string &value)
     {
+      // Some values in the database are stored as objects so I added
+      // this conditional to handle those specific cases
+      if (value[0] == '{')
+      {
+        result_string = result_string + "\"" + key + "\"" + ":" + value;
+        return;
+      };
       result_string = result_string + "\"" + key + "\"" + ":" + "\"" + value + "\"";
     };
 
