@@ -3,6 +3,7 @@
 #include <iostream>
 #include <pqxx/pqxx>
 
+#include "database/database.hpp"
 #include "json_response/json_response.hpp"
 
 using String = std::string;
@@ -15,28 +16,7 @@ namespace aircrafts
   {
     try
     {
-      char *connection_string = getenv("AIRLINES_CONNECTION");
-      connection c(connection_string);
-
-      std::string limit(req.get_arg("limit"));
-      std::string offset(req.get_arg("offset"));
-
-      if (limit.empty())
-      {
-        limit = "10";
-      }
-
-      if (offset.empty())
-      {
-        offset = "0";
-      }
-
-      std::string query_string = std::format(
-          "SELECT * FROM aircrafts_data LIMIT {} OFFSET {};", limit, offset);
-
-      work w(c);
-      result res = w.exec(query_string);
-      w.commit();
+      result res = database::query_all("aircrafts_data", req.get_arg("limit"), req.get_arg("offset"));
 
       json::JsonResponse<String, String, int> json_response(res);
 
