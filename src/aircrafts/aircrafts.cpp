@@ -8,7 +8,6 @@
 
 using String = std::string;
 using namespace httpserver;
-using namespace pqxx;
 
 namespace aircrafts
 {
@@ -16,7 +15,7 @@ namespace aircrafts
   {
     try
     {
-      result res = database::query_all("aircrafts_data", req.get_arg("limit"), req.get_arg("offset"));
+      pqxx::result res = database::query_all("aircrafts_data", req.get_arg("limit"), req.get_arg("offset"));
 
       json::JsonResponse<String, String, int> json_response(res);
 
