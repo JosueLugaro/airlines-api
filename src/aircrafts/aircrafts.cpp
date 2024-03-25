@@ -1,8 +1,6 @@
-#include "aircrafts/aircrafts.hpp"
-
 #include <iostream>
-#include <pqxx/pqxx>
 
+#include "aircrafts/aircrafts.hpp"
 #include "database/database.hpp"
 #include "json_response/json_response.hpp"
 
