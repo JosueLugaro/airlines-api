@@ -3,6 +3,8 @@
 #include <pqxx/pqxx>
 #include <string>
 
+#include <iostream>
+
 namespace json
 {
   template <typename... TYPES>
